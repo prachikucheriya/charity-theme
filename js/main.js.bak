@@ -1,0 +1,107 @@
+(function ($) {
+    "use strict";
+
+    /*=============================================
+        =    		 Preloader			      =
+    =============================================*/
+    function preloader() {
+        //$('.smart-page-loader').delay(0).fadeOut();
+        jQuery('.smart-page-loader').delay(0).fadeOut();
+        jQuery('body:not(".elementor-editor-active")').removeClass('wp-smart-body');
+    };
+
+    $(window).on('load', function () {
+        preloader();
+        //mainSlider();
+        //aosAnimation();
+        //wowAnimation();
+    });
+    /* ===============================  Mouse effect  =============================== */
+
+    function mousecursor() {
+        if ($("body")) {
+            const e = document.querySelector(".cursor-inner"),
+                t = document.querySelector(".cursor-outer");
+            let n, i = 0,
+                o = !1;
+            window.onmousemove = function (s) {
+                o || (t.style.transform = "translate(" + s.clientX + "px, " + s.clientY + "px)"), e.style.transform = "translate(" + s.clientX + "px, " + s.clientY + "px)", n = s.clientY, i = s.clientX
+            }, $("body").on("mouseenter", "a, .cursor-pointer", function () {
+                e.classList.add("cursor-hover"), t.classList.add("cursor-hover")
+            }), $("body").on("mouseleave", "a, .cursor-pointer", function () {
+                $(this).is("a") && $(this).closest(".cursor-pointer").length || (e.classList.remove("cursor-hover"), t.classList.remove("cursor-hover"))
+            }), e.style.visibility = "visible", t.style.visibility = "visible"
+        }
+    };
+
+    $(function () {
+        mousecursor();
+    });
+
+    /* ==========  Mouse effect  =========== */
+    $('.testimonial-home').owlCarousel({
+        items: 1,
+        animateOut: 'fadeOut',
+        loop: true,
+        nav: true,
+        margin: 10,
+    });
+    $('.custom1').owlCarousel({
+        animateOut: 'slideOutDown',
+        animateIn: 'flipInX',
+        items: 1,
+        margin: 30,
+        stagePadding: 30,
+        smartSpeed: 450
+    });
+   
+    /*=============================================
+   =     Background Data Images     =
+=============================================*/
+    $('.image-popup-vertical-fit').magnificPopup({
+        type: 'image',
+        mainClass: 'mfp-with-zoom',
+        gallery: {
+            enabled: true
+        },
+
+        zoom: {
+            enabled: true,
+
+            duration: 300, // duration of the effect, in milliseconds
+            easing: 'ease-in-out', // CSS transition easing function
+
+            opener: function (openerElement) {
+
+                return openerElement.is('img') ? openerElement : openerElement.find('img');
+            }
+        }
+
+    });
+
+
+    jQuery(".filter-button").click(function () {
+        var value = jQuery(this).attr('data-filter');
+
+        if (value == "all") {
+            //$('.filter').removeClass('hidden');
+            jQuery('.filter').show('1000');
+        }
+        else {
+            jQuery(".filter").not('.' + value).hide('3000');
+            jQuery('.filter').filter('.' + value).show('3000');
+
+        }
+    });
+
+    if (jQuery(".filter-button").removeClass("active")) {
+        jQuery(this).removeClass("active");
+    }
+    jQuery(this).addClass("active");
+
+    jQuery(".port-filter li").click(function () {
+        jQuery(this).addClass('selected').siblings().removeClass('selected');
+    });
+
+
+})(jQuery);
